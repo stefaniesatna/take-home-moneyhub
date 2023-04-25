@@ -21,11 +21,15 @@ Before diving into the implementation details, I first focused on testing the re
 
 No additional scripts or tests were added in this implementation.
 
+## Deprecated modules
+
+The `request` module used originally in the admin service [was deprecated](https://github.com/request/request/issues/3142) and since it was only used in one endpoint, I decided to rewrite that endpoint using node-fetch instead. Usually I would take into account the existing codebase before introducing new modules to take the value of consistency into account.
+
 ## Considerations & Improvements with More Time
 
 - Validate input data and handle any errors gracefully.
 - Encrypt data in transit.
 - Set up monitoring and logging to detect and respond to any security incidents.
-- Add unit tests and integration tests
-- Add type safety
-- Make use of ramda for consistency across the codebase
+- Add unit tests and integration tests.
+- Add type safety.
+- Make use of ramda for consistency across the codebase.
