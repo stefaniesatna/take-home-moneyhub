@@ -1,77 +1,31 @@
 # Moneyhub Tech Test - Investments and Holdings
 
-At Moneyhub we use microservices to partition and separate the concerns of the codebase. In this exercise we have given you an example `admin` service and some accompanying services to work with. In this case the admin service backs a front end admin tool allowing non-technical staff to interact with data.
+## Overview
 
-A request for a new admin feature has been received
+This project is an implementation of an admin microservice for generating and exporting investment holding reports. It fetches data from two other services, the investments service and the financial companies service, and then generates a CSV report which is sent back to the investments service for processing.
 
-## Requirements
+## Disclaimer
 
-- An admin is able to generate a csv formatted report showing the values of all user holdings
-    - The report should be sent to the `/export` route of the investments service
-    - The investments service expects the csv report to be sent as json
-    - The csv should contain a row for each holding matching the following headers
-    |User|First Name|Last Name|Date|Holding|Value|
-    - The holding should be the name of the holding account given by the financial-companies service
-    - The holding value can be calculated by `investmentTotal * investmentPercentage`
-- Ensure use of up to date packages and libraries (the service is known to use deprecated packages)
-- Make effective use of git
+During this exercise, I explored working with microservices for the first time. I also refreshed my experience with Node, CommonJS, Postman, and npm concepts, such as updating dependencies, which I haven't done recently since I haven't worked with Node at Meta. Additionally, I wasn't entirely clear on the requirement for the investments service to receive the report as JSON, so I proceeded with sending it as a CSV. Under normal circumstances, if I wasn't pressed for time during the hiring process, I would have sought clarification first.
+All in all, these minor setbacks meant that the exercise took me slightly longer to complete than the recommended 1-2 hours. However, it was a valuable learning experience that I will be able to utilise in my future projects.
 
-We prefer:
-- Functional code 
-- Ramda.js (this is not a requirement but feel free to investigate)
-- Unit testing
+## Approach
 
-### Notes
-All of you work should take place inside the `admin` microservice
+Before diving into the implementation details, I first focused on testing the request flow using empty functions. This allowed me to ensure that the overall architecture was functioning as intended. Once I confirmed that the request flow is working correctly, I implemented the function responsible for generating a CSV report and added basic error handling.
 
-For the purposes of this task we would assume there are sufficient security middleware, permissions access and PII safe protocols, you do not need to add additional security measures as part of this exercise.
+## New routes
 
-You are free to use any packages that would help with this task
+`POST /admin/holdings`: fetches data from financial-companies and investments services, generates a CSV report and sends that report to the investments service
 
-We're interested in how you break down the work and build your solution in a clean, reusable and testable manner rather than seeing a perfect example, try to only spend around *1-2 hours* working on it
+## Additional Scripts and Tests
 
-## Deliverables
-**Please make sure to update the readme with**:
+No additional scripts or tests were added in this implementation.
 
-- Your new routes
-- How to run any additional scripts or tests you may have added
-- Relating to the task please add answers to the following questions;
-    1. How might you make this service more secure?
-    2. How would you make this solution scale to millions of records?
-    3. What else would you have liked to improve given more time?
-  
+## Considerations & Improvements with More Time
 
-On completion email a link to your repository to your contact at Moneyhub and ensure it is publicly accessible.
-
-## Getting Started
-
-Please clone this service and push it to your own github (or other) public repository
-
-To develop against all the services each one will need to be started in each service run
-
-```bash
-npm start
-or
-npm run develop
-```
-
-The develop command will run nodemon allowing you to make changes without restarting
-
-The services will try to use ports 8081, 8082 and 8083
-
-Use Postman or any API tool of you choice to trigger your endpoints (this is how we will test your new route).
-
-### Existing routes
-We have provided a series of routes 
-
-Investments - localhost:8081
-- `/investments` get all investments
-- `/investments/:id` get an investment record by id
-- `/investments/export` expects a csv formatted text input as the body
-
-Financial Companies - localhost:8082
-- `/companies` get all companies details
-- `/companies/:id` get company by id
-
-Admin - localhost:8083
-- `/investments/:id` get an investment record by id
+- Validate input data and handle any errors gracefully.
+- Encrypt data in transit.
+- Set up monitoring and logging to detect and respond to any security incidents.
+- Add unit tests and integration tests
+- Add type safety
+- Make use of ramda for consistency across the codebase
