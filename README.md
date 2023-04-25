@@ -23,7 +23,7 @@ No additional scripts or tests were added in this implementation.
 
 ## Deprecated modules
 
-The `request` module used originally in the admin service [was deprecated](https://github.com/request/request/issues/3142) and since it was only used in one endpoint, I decided to rewrite that endpoint using node-fetch instead. Usually I would take into account the existing codebase before introducing new modules to take the value of consistency into account.
+The `request` module used originally in the admin service [was deprecated](https://github.com/request/request/issues/3142) and since it was only used in one endpoint, I decided to rewrite that endpoint using `node-fetch` instead. Usually I would take into account the existing codebase before introducing new modules to take the value of consistency into account.
 
 ## Considerations & Improvements with More Time
 
