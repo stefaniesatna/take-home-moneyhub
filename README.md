@@ -18,9 +18,13 @@ The following are some points of ambiguity I encountered with the requirements, 
 ## Approach
 
 Before diving into the implementation details, I first focused on testing the request flow using empty functions. This allowed me to ensure that the overall architecture was functioning as intended. Once I confirmed that the request flow is working correctly, I implemented the function responsible for generating a CSV report and added basic error handling.
+
 ## New routes
+
 `POST /admin/holdings`: fetches data from financial-companies and investments services, generates a CSV report and sends that report to the investments service
+
 ## Additional Scripts and Tests
+
 No additional scripts or tests were added in this implementation.
 
 ## Deprecated modules
