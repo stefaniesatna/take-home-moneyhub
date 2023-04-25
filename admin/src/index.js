@@ -1,40 +1,43 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("config");
-const request = require("request");
 const {
   generateCSVReport,
   sendCSVReportToInvestmentsService,
 } = require("./utils");
+const { validateInvestmentId, errorHandler } = require("./middleware");
+
+let fetch;
+
+(async () => {
+  const nodeFetch = await import("node-fetch");
+  fetch = nodeFetch.default;
+})();
 
 const app = express();
 
 app.use(bodyParser.json({ limit: "10mb" }));
+app.use(errorHandler);
 
-app.get("/investments/:id", (req, res) => {
+app.get("/investments/:id", validateInvestmentId, async (req, res) => {
   const { id } = req.params;
-  request.get(
-    `${config.investmentsServiceUrl}/investments/${id}`,
-    (e, r, investments) => {
-      if (e) {
-        console.error(e);
-        res.send(500);
-      } else {
-        res.send(investments);
-      }
-    }
+
+  const response = await fetch(
+    `${config.investmentsServiceUrl}/investments/${id}`
   );
+  if (!response.ok) {
+    throw new Error(
+      `Request to investments service failed with status ${response.status}`
+    );
+  }
+  const investments = await response.json();
+  res.send(investments);
 });
 
 app.post("/admin/holdings", async (req, res) => {
-  try {
-    const csvReport = await generateCSVReport();
-    const response = await sendCSVReportToInvestmentsService(csvReport);
-    res.sendStatus(response.status);
-  } catch (error) {
-    console.error("Error processing the request: ", error);
-    res.sendStatus(500);
-  }
+  const csvReport = await generateCSVReport();
+  const response = await sendCSVReportToInvestmentsService(csvReport);
+  res.send({ exportServiceStatus: response.status, report: csvReport });
 });
 
 app.listen(config.port, (err) => {
