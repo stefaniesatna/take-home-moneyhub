@@ -6,8 +6,15 @@ This project is an implementation of an admin microservice for generating and ex
 
 ## Disclaimer
 
-During this exercise, I explored working with microservices for the first time. I also refreshed my experience with Node, CommonJS, Postman, and npm concepts, such as updating dependencies, which I haven't done recently since I haven't worked with Node at Meta. Additionally, I wasn't entirely clear on the requirement for the investments service to receive the report as JSON, so I proceeded with sending it as a CSV. Under normal circumstances, if I wasn't pressed for time during the hiring process, I would have sought clarification first.
+During this exercise, I explored working with microservices for the first time. I also refreshed my experience with Node, CommonJS, Postman, and npm concepts, such as updating dependencies, which I haven't done recently since I haven't worked with Node at Meta. Additionally, I wasn't clear on some of the requirements, which I listed below.
 All in all, these minor setbacks meant that the exercise took me slightly longer to complete than the recommended 1-2 hours. However, it was a valuable learning experience that I will be able to utilise in my future projects.
+
+### Requirements ambiguity
+
+The following are some points of ambiguity I encountered with the requirements, where under normal circumstances, if I wasn't pressed for time during the hiring process, I would have sought clarification first.
+
+- I didn't understand the requirement for investments service to receive the report as JSON, so I proceeded with sending it as a CSV. Under normal circumstances, if I wasn't pressed for time during the hiring process, I would have sought clarification first.
+- I didn't understand whether the admin service should receive the report in the response, but it made the most sense to me so I included it.
 
 ## Approach
 
@@ -33,3 +40,4 @@ The `request` module used originally in the admin service [was deprecated](https
 - Add unit tests and integration tests.
 - Add type safety.
 - Make use of ramda for consistency across the codebase.
+- Scaling ideas: Implement pagination to limit the number of records per request, add caching to improve response times, implement load balancing to distribute the load evenly across multiple instances of the app server.
