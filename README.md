@@ -13,7 +13,7 @@ All in all, these minor setbacks meant that the exercise took me slightly longer
 
 The following are some points of ambiguity I encountered with the requirements, where under normal circumstances, if I wasn't pressed for time during the hiring process, I would have sought clarification first.
 
-- I didn't understand the requirement for investments service to receive the report as JSON, so I proceeded with sending it as a CSV. Under normal circumstances, if I wasn't pressed for time during the hiring process, I would have sought clarification first.
+- I didn't understand the requirement for investments service to receive the report as JSON, so I proceeded with sending it as a CSV.
 - I didn't understand whether the admin service should receive the report in the response, but it made the most sense to me so I included it.
 
 ## Approach
